@@ -1,7 +1,7 @@
 # 🏡 PropertyHub - Modern Real Estate Listings App
 
-TRY OUT ! ITS DEPLOYED
-LINK :- https://propertyhubb.netlify.app/
+# TRY OUT ! ITS DEPLOYED
+# LINK :- https://propertyhubb.netlify.app/
 
 
 <p align="center">
