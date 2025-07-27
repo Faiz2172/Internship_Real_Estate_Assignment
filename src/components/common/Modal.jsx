@@ -1,14 +1,40 @@
-// src/components/common/Modal.jsx
+import React, { useEffect } from 'react';
+
 const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
   
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
-        <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-          {children}
-        </div>
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300" 
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
+      onClick={onClose}
+    >
+      <div 
+        className="rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-all duration-300"
+        style={{ 
+          backgroundColor: 'var(--bg-secondary)', 
+          border: '1px solid var(--border-color)' 
+        }}
+        onClick={e => e.stopPropagation()}
+      >
+        {children}
       </div>
-    )
-  }
-  
- export default Modal
+    </div>
+  );
+};
+
+export default Modal;

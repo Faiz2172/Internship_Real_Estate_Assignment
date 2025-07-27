@@ -1,19 +1,41 @@
-import React from 'react';
-import Layout from './components/layout/Layout';
-import PropertyList from './components/property/PropertyList';
+import React, { useState } from 'react';
 import { PropertyProvider } from './context/PropertyContext';
-import { ThemeProvider } from './context/ThemeContext';
+import AppHeader from './components/common/AppHeader';
+import AppHero from './components/common/AppHero';
+import AppMain from './components/common/AppMain';
+import AppFooter from './components/common/AppFooter';
+import AppPropertyDetailsModal from './components/common/AppPropertyDetailsModal';
 
 const App = () => {
-  return (
-    <ThemeProvider>
-      <PropertyProvider>
-        <Layout>
-          <PropertyList />
-        </Layout>
-      </PropertyProvider>
-    </ThemeProvider>
-  )
-}
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
 
-export default App
+  const handleViewDetails = (property) => {
+    setSelectedProperty(property);
+    setShowDetailsModal(true);
+  };
+
+  return (
+    <PropertyProvider>
+      <div 
+        className="min-h-screen transition-all duration-300"
+        style={{ backgroundColor: 'var(--bg-primary)' }}
+      >
+        <AppHeader />
+        <AppHero />
+        <AppMain onViewDetails={handleViewDetails} />
+        <AppFooter />
+        <AppPropertyDetailsModal
+          property={selectedProperty}
+          isOpen={showDetailsModal}
+          onClose={() => {
+            setShowDetailsModal(false);
+            setSelectedProperty(null);
+          }}
+        />
+      </div>
+    </PropertyProvider>
+  );
+};
+
+export default App;

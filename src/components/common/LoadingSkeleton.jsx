@@ -1,19 +1,38 @@
-// src/components/common/LoadingSkeleton.jsx
-import { useTheme } from '../../context/ThemeContext';
+import React from 'react';
 
 const LoadingSkeleton = () => {
-    const { darkMode } = useTheme();
-    return (
-    <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-pulse ${darkMode ? 'dark' : ''}`}>
-      <div className="h-64 bg-gray-300 dark:bg-gray-600"></div>
+  return (
+    <div 
+      className="rounded-2xl shadow-lg overflow-hidden animate-pulse"
+      style={{ 
+        backgroundColor: 'var(--bg-card)',
+        border: `1px solid var(--border-color)`
+      }}
+    >
+      <div 
+        className="h-64"
+        style={{ backgroundColor: 'var(--border-color)' }}
+      ></div>
       <div className="p-6 space-y-4">
-        <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
-        <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-full"></div>
-        <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/3"></div>
+        <div 
+          className="h-6 rounded-lg w-3/4"
+          style={{ backgroundColor: 'var(--border-color)' }}
+        ></div>
+        <div 
+          className="h-4 rounded w-1/2"
+          style={{ backgroundColor: 'var(--border-color)' }}
+        ></div>
+        <div 
+          className="h-4 rounded w-full"
+          style={{ backgroundColor: 'var(--border-color)' }}
+        ></div>
+        <div 
+          className="h-12 rounded-xl w-full"
+          style={{ backgroundColor: 'var(--border-color)' }}
+        ></div>
       </div>
     </div>
-        )
-}
+  );
+};
 
-export default LoadingSkeleton
+export default LoadingSkeleton;

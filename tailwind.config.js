@@ -1,15 +1,21 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-      "./index.html",
-      "./src/**/*.{js,ts,jsx,tsx}",
-    ],
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: {
-            sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          },
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  darkMode: 'class', // This is crucial - enables class-based dark mode
+  theme: {
+    extend: {
+      animation: {
+        'shimmer': 'shimmer 2s linear infinite',
       },
+      keyframes: {
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        }
+      }
     },
-    plugins: [],
-  }
+  },
+  plugins: [],
+}

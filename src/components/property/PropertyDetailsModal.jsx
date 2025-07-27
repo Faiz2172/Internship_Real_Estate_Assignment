@@ -1,16 +1,20 @@
-// src/components/property/PropertyDetailsModal.jsx
-import { MapPin, X } from 'lucide-react'
-import Modal from '../common/Modal'
+import React from 'react';
+import { MapPin, X } from 'lucide-react';
+import Modal from '../common/Modal';
 
 const PropertyDetailsModal = ({ property, isOpen, onClose }) => {
-  if (!property) return null
+  if (!property) return null;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-2 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors"
+          className="absolute top-4 right-4 z-10 backdrop-blur-sm p-2 rounded-full transition-all duration-300 hover:scale-110"
+          style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            color: '#374151'
+          }}
         >
           <X size={20} />
         </button>
@@ -24,15 +28,24 @@ const PropertyDetailsModal = ({ property, isOpen, onClose }) => {
         <div className="p-8">
           <div className="flex items-start justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h2 
+                className="text-3xl font-bold mb-2"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {property.name}
               </h2>
-              <div className="flex items-center text-gray-600 dark:text-gray-300 mb-2">
-                <MapPin size={18} className="mr-2" />
-                <span>{property.location}</span>
+              <div className="flex items-center mb-2">
+                <MapPin 
+                  size={18} 
+                  className="mr-2" 
+                  style={{ color: 'var(--text-secondary)' }}
+                />
+                <span style={{ color: 'var(--text-secondary)' }}>
+                  {property.location}
+                </span>
               </div>
             </div>
-            <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-6 py-3 rounded-2xl">
+            <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-6 py-3 rounded-2xl shadow-lg">
               <div className="text-2xl font-bold">${property.price}</div>
               <div className="text-sm opacity-90">per month</div>
             </div>
@@ -40,42 +53,121 @@ const PropertyDetailsModal = ({ property, isOpen, onClose }) => {
           
           {property.bedrooms && (
             <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">{property.bedrooms}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">Bedrooms</div>
+              <div 
+                className="p-4 rounded-xl text-center transition-colors duration-300"
+                style={{ backgroundColor: 'var(--bg-card)' }}
+              >
+                <div 
+                  className="text-2xl font-bold"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {property.bedrooms}
+                </div>
+                <div 
+                  className="text-sm"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Bedrooms
+                </div>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">{property.bathrooms}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">Bathrooms</div>
+              <div 
+                className="p-4 rounded-xl text-center transition-colors duration-300"
+                style={{ backgroundColor: 'var(--bg-card)' }}
+              >
+                <div 
+                  className="text-2xl font-bold"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {property.bathrooms}
+                </div>
+                <div 
+                  className="text-sm"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Bathrooms
+                </div>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">{property.sqft}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">Sq Ft</div>
+              <div 
+                className="p-4 rounded-xl text-center transition-colors duration-300"
+                style={{ backgroundColor: 'var(--bg-card)' }}
+              >
+                <div 
+                  className="text-2xl font-bold"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {property.sqft}
+                </div>
+                <div 
+                  className="text-sm"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Sq Ft
+                </div>
               </div>
             </div>
           )}
           
           <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Description</h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              {property.fullDescription}
+            <h3 
+              className="text-xl font-semibold mb-3"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Description
+            </h3>
+            <p 
+              className="leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {property.fullDescription || property.description}
             </p>
           </div>
           
-          <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Location</h3>
-            <div className="bg-gray-200 dark:bg-gray-600 h-48 rounded-lg flex items-center justify-center">
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <MapPin size={32} className="mx-auto mb-2" />
-                <p>Map integration would go here</p>
-                <p className="text-sm">Lat: {property.coordinates.lat}, Lng: {property.coordinates.lng}</p>
+          <div 
+            className="p-6 rounded-xl transition-colors duration-300"
+            style={{ backgroundColor: 'var(--bg-card)' }}
+          >
+            <h3 
+              className="text-lg font-semibold mb-3"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Location
+            </h3>
+            <div 
+              className="h-48 rounded-lg flex items-center justify-center transition-colors duration-300"
+              style={{ backgroundColor: 'var(--border-color)' }}
+            >
+              <div className="text-center">
+                <MapPin 
+                  size={32} 
+                  className="mx-auto mb-2" 
+                  style={{ color: 'var(--text-secondary)' }}
+                />
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  Map integration would go here
+                </p>
+                <p 
+                  className="text-sm mt-1"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Lat: {property.coordinates?.lat || 'N/A'}, Lng: {property.coordinates?.lng || 'N/A'}
+                </p>
               </div>
             </div>
+          </div>
+          
+          {/* Contact/Action Buttons */}
+          <div className="mt-6 flex gap-4">
+            <button className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-105 active:scale-95">
+              Contact Agent
+            </button>
+            <button className="flex-1 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white py-3 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-105 active:scale-95">
+              Schedule Tour
+            </button>
           </div>
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default PropertyDetailsModal
+export default PropertyDetailsModal;
