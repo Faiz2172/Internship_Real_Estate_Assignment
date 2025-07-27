@@ -2,6 +2,10 @@ import React from 'react';
 import { MapPin, X } from 'lucide-react';
 import Modal from '../common/Modal';
 
+
+
+const MAP_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
+
 const PropertyDetailsModal = ({ property, isOpen, onClose }) => {
   if (!property) return null;
 
@@ -136,22 +140,34 @@ const PropertyDetailsModal = ({ property, isOpen, onClose }) => {
               className="h-48 rounded-lg flex items-center justify-center transition-colors duration-300"
               style={{ backgroundColor: 'var(--border-color)' }}
             >
-              <div className="text-center">
-                <MapPin 
-                  size={32} 
-                  className="mx-auto mb-2" 
-                  style={{ color: 'var(--text-secondary)' }}
-                />
-                <p style={{ color: 'var(--text-secondary)' }}>
-                  Map integration would go here
-                </p>
-                <p 
-                  className="text-sm mt-1"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Lat: {property.coordinates?.lat || 'N/A'}, Lng: {property.coordinates?.lng || 'N/A'}
-                </p>
-              </div>
+              {property.coordinates?.lat && property.coordinates?.lng ? (
+                <iframe
+                  title="Property Location Map"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: '0.5rem', minHeight: '100%', minWidth: '100%' }}
+                  src={`https://api.maptiler.com/maps/streets/?key=${MAP_API_KEY}#15/${property.coordinates.lat}/${property.coordinates.lng}`}
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              ) : (
+                <div className="text-center">
+                  <MapPin 
+                    size={32} 
+                    className="mx-auto mb-2" 
+                    style={{ color: 'var(--text-secondary)' }}
+                  />
+                  <p style={{ color: 'var(--text-secondary)' }}>
+                    Map integration would go here
+                  </p>
+                  <p 
+                    className="text-sm mt-1"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    Lat: {property.coordinates?.lat || 'N/A'}, Lng: {property.coordinates?.lng || 'N/A'}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           
