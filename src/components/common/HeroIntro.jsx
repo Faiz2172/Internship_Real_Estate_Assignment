@@ -21,10 +21,10 @@ const HeroIntro = () => (
         we offer a curated selection of premium properties to suit every lifestyle and budget. 
         Our expert team is here to guide you through every step of your property journey.
       </p>
-      {/* Search and Filter UI below the heading and subtitle */}
+      {/* Search and Filter UI below the heading and subtitle
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
         <PropertySearchFilter />
-      </div>
+      </div> */}
       {/* Scroll indicator */}
       <div className="animate-bounce">
         <div 
