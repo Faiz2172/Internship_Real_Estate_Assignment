@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Home, Plus, Moon, Sun, Search, Filter } from 'lucide-react';
 import { useProperty } from '../../context/PropertyContext';
 import Modal from './Modal';
-import AddPropertyModal from './../property/AddPropertyModal';
+import AddPropertyModal from '../property/AddPropertyModal';
 
 const Header = () => {
   const { darkMode, setDarkMode, setSearchTerm, selectedType, setSelectedType } = useProperty();
